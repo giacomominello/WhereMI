@@ -16,6 +16,9 @@ import { InMemoryDataService }  from './in-memory-data.service';
 import { PlaceSearchComponent } from './place-search/place-search.component';
 
 import { AgmCoreModule } from '@agm/core';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import { BookComponent } from './book/book.component';
 
 
 @NgModule({
@@ -26,7 +29,10 @@ import { AgmCoreModule } from '@agm/core';
     LocationDetailComponent,
     MessagesComponent,
     DashboardComponent,
-    PlaceSearchComponent
+    PlaceSearchComponent,
+    LoginComponent,
+    SignupComponent,
+    BookComponent
   ],
   imports: [
     BrowserModule,
@@ -39,12 +45,7 @@ import { AgmCoreModule } from '@agm/core';
 
     AppRoutingModule,
 
-    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
-    // and returns simulated server responses.
-    // Remove it when a real server is ready to receive requests.
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    )
+  
 
   ],
   bootstrap: [AppComponent]
