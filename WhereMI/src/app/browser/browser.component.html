@@ -1,3 +1,22 @@
+<!-- aggiunto in prova -->
+<script>
+var x = document.getElementById("demo");
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude; 
+}
+</script>
+
+<!-- fine prova -->
+
 <h2>My Places</h2>
 
 <!-- this creates a google map on the page with the given lat/lng from -->
