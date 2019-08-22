@@ -1,11 +1,11 @@
-<div *ngIf="location">
-
-    <h2>{{location.name | uppercase}} Details</h2>
-    <div><span>ID: </span>{{location.id}}</div>
-    <div>
-      <label>name:
-        <input [(ngModel)]="location.name" placeholder="name"/>
-      </label>
-    </div>
-  
+<div *ngIf="place">
+  <h2>{{place.name | uppercase}} Details</h2>
+  <div><span>id: </span>{{place.id}}</div>
+  <div>
+    <label>name:
+      <input [(ngModel)]="place.name" placeholder="name"/>
+    </label>
   </div>
+  <button (click)="goBack()">go back</button>
+  <button (click)="save()">save</button>
+</div>

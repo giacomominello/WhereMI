@@ -1,6 +1,6 @@
-import { Location } from './location';
+import { Place } from './place';
 
-export const LOCATIONS: Location[] = [
+export const PLACES: Place[] = [
   { id: 11, name: 'Bologna' },
   { id: 12, name: 'Treviso' },
   { id: 13, name: 'Carità' },

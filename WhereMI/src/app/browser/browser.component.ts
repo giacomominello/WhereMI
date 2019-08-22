@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '../location';
-import { LocationService } from '../location.service';
+import { Place } from '../place';
+import { PlaceService } from '../place.service';
 
 @Component({
   selector: 'app-browser',
@@ -9,23 +9,35 @@ import { LocationService } from '../location.service';
 })
 export class BrowserComponent implements OnInit {
   
-  selectedLocation: Location;
+  lat = 51.678418;
+  lng = 7.809007;
   
-  locations:Location[];
+  places:Place[];
 
-  constructor(private locationService: LocationService) { }
+  constructor(private placeService: PlaceService) { }
 
   ngOnInit() {
-    this.getLocations();
+    this.getPlaces();
   }
 
-  onSelect(location: Location): void {
-    this.selectedLocation = location;
+
+  getPlaces(): void {
+    this.placeService.getPlaces()
+        .subscribe(places => this.places = places);
   }
 
-  getLocations(): void {
-    this.locationService.getLocations()
-        .subscribe(locations => this.locations = locations);
+  add(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    this.placeService.addPlace({ name } as Place)
+      .subscribe(place => {
+        this.places.push(place);
+      });
+  }
+
+  delete(place: Place): void {
+    this.places = this.places.filter(h => h !== place);
+    this.placeService.deletePlace(place).subscribe();
   }
 
 }

@@ -1,10 +1,28 @@
-<h2>My Locations</h2>
-<ul class="locations">
-  <li *ngFor="let location of locations"
-    [class.selected]="location === selectedLocation"
-    (click)="onSelect(location)">
-    <span class="badge">{{location.id}}</span> {{location.name}}
+<h2>My Places</h2>
+
+<!-- this creates a google map on the page with the given lat/lng from -->
+<!-- the component as the initial center of the map: -->
+<agm-map [latitude]="lat" [longitude]="lng">
+  <agm-marker [latitude]="lat" [longitude]="lng">
+    <agm-info-window>Succhiatemi il cazzo</agm-info-window>
+  </agm-marker>
+</agm-map>
+<div>
+  <label>Place name:
+    <input #placeName />
+  </label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(placeName.value); placeName.value=''">
+    add
+  </button>
+</div>
+
+<ul class="places">
+  <li *ngFor="let place of places">
+    <a routerLink="/detail/{{place.id}}">
+      <span class="badge">{{place.id}}</span> {{place.name}}
+    </a>
+    <button class="delete" title="delete place"
+      (click)="delete(place)">x</button>
   </li>
 </ul>
-
-<app-location-detail [location]="selectedLocation"></app-location-detail>
