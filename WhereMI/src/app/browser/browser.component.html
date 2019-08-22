@@ -1,0 +1,10 @@
+<h2>My Locations</h2>
+<ul class="locations">
+  <li *ngFor="let location of locations"
+    [class.selected]="location === selectedLocation"
+    (click)="onSelect(location)">
+    <span class="badge">{{location.id}}</span> {{location.name}}
+  </li>
+</ul>
+
+<app-location-detail [location]="selectedLocation"></app-location-detail>
