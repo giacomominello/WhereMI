@@ -1,12 +1,15 @@
 var mongoose = require('mongoose');
 var passport = require('passport');
+
 var config = require('../config/database');
 require('../config/passport')(passport);
+
 var express = require('express');
 var jwt = require('jsonwebtoken');
 var router = express.Router();
 var User = require("../models/User");
 var Book = require("../models/Book");
+var Place = require("../models/Place");
 
 router.post('/signup', function(req, res) {
   if (!req.body.username || !req.body.password) {
@@ -50,9 +53,8 @@ router.post('/signin', function(req, res) {
   });
 });
 
-router.post('/book', passport.authenticate('jwt', { session: false}), function(req, res) {
-  var token = getToken(req.headers);
-  if (token) {
+router.post('/book', function(req, res) {
+  
     console.log(req.body);
     var newBook = new Book({
       isbn: req.body.isbn,
@@ -67,9 +69,7 @@ router.post('/book', passport.authenticate('jwt', { session: false}), function(r
       }
       res.json({success: true, msg: 'Successful created new book.'});
     });
-  } else {
-    return res.status(403).send({success: false, msg: 'Unauthorized.'});
-  }
+
 });
 
 router.get('/book', passport.authenticate('jwt', { session: false}), function(req, res) {
@@ -82,6 +82,13 @@ router.get('/book', passport.authenticate('jwt', { session: false}), function(re
   } else {
     return res.status(403).send({success: false, msg: 'Unauthorized.'});
   }
+});
+
+router.get('/places', function(req, res) {
+    Place.find(function (err, places) {
+      if (err) return next(err);
+      res.json(places);
+    });
 });
 
 getToken = function (headers) {

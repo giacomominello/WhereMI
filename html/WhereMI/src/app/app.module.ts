@@ -19,6 +19,7 @@ import { AgmCoreModule } from '@agm/core';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { BookComponent } from './book/book.component';
+import { BookCreateComponent } from './book-create/book-create.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { BookComponent } from './book/book.component';
     PlaceSearchComponent,
     LoginComponent,
     SignupComponent,
-    BookComponent
+    BookComponent,
+    BookCreateComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,8 @@ import { BookComponent } from './book/book.component';
     FormsModule,
 
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCLlXi1S9v2zQ61x9daPz08JvPQjNPUzWo'
+      apiKey: 'AIzaSyAzSnXXXXXXXXXXXXXXXXXSZGGWU',
+      libraries: ['places']
     }),
 
     AppRoutingModule,

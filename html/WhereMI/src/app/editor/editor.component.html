@@ -1,1 +1,18 @@
-<p>editor works!</p>
+<h2>Editor</h2>
+
+<div class="container">
+  
+
+  <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+    <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
+      (dragEnd)="markerDragEnd($event)"> 
+      <agm-info-window> Insert editor information
+
+      </agm-info-window>
+    </agm-marker>
+  </agm-map>
+ 
+  <h5>Address: {{address}}</h5>
+  <div>Latitude: {{latitude}}</div>
+  <div>Longitude: {{longitude}}</div>
+</div>
