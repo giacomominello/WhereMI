@@ -1,4 +1,4 @@
 module.exports = {
-  'secret':'meansecure',
-  'database': 'mongodb://localhost/mean-secure'
+  'secret':'wheremi',
+  'database': 'mongodb://localhost/wheremi'
 };

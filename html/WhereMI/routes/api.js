@@ -91,6 +91,27 @@ router.get('/places', function(req, res) {
     });
 });
 
+router.post('/places', passport.authenticate('jwt', { session: false}), function(req, res) {
+  var token = getToken(req.headers);
+  if (token) {
+    console.log(req.body);
+    var newPlace = new Place({
+      id: req.body.id,
+      title: req.body.title,
+    });
+
+    newPlace.save(function(err) {
+      if (err) {
+        return res.json({success: false, msg: 'Save place failed.'});
+      }
+      res.json({success: true, msg: 'Successful created new place.'});
+    });
+  } else {
+    return res.status(403).send({success: false, msg: 'Unauthorized.'});
+  }
+});
+
+
 getToken = function (headers) {
   if (headers && headers.authorization) {
     var parted = headers.authorization.split(' ');

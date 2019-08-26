@@ -11,15 +11,11 @@ import { BrowserComponent } from './browser/browser.component';
 import { LocationDetailComponent } from './location-detail/location-detail.component';
 import { MessagesComponent } from './messages/messages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService }  from './in-memory-data.service';
 import { PlaceSearchComponent } from './place-search/place-search.component';
 
 import { AgmCoreModule } from '@agm/core';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { BookComponent } from './book/book.component';
-import { BookCreateComponent } from './book-create/book-create.component';
 
 
 @NgModule({
@@ -32,9 +28,7 @@ import { BookCreateComponent } from './book-create/book-create.component';
     DashboardComponent,
     PlaceSearchComponent,
     LoginComponent,
-    SignupComponent,
-    BookComponent,
-    BookCreateComponent
+    SignupComponent
   ],
   imports: [
     BrowserModule,

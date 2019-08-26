@@ -6,25 +6,28 @@
   <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
     <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
       (dragEnd)="markerDragEnd($event)"> 
-      <agm-info-window> Insert here information
+      <agm-info-window> You are here!
 
       </agm-info-window>
     </agm-marker>
-  </agm-map>
  
-  <h5>Address: {{address}}</h5>
+    <agm-marker 
+    *ngFor="let place of places"
+    [latitude]="latitude+1"
+    [longitude]="longitude+1"
+    [markerDraggable]="false">
+    
+  <agm-info-window>
+    <strong>{{place.name}}</strong>
+  </agm-info-window>
+  
+  </agm-marker>
+
+  
+  </agm-map>
+
   <div>Latitude: {{latitude}}</div>
   <div>Longitude: {{longitude}}</div>
-</div>
-
-<div>
-  <label>Place name:
-    <input #placeName />
-  </label>
-  <!-- (click) passes input value to add() and then clears the input -->
-  <button (click)="add(placeName.value); placeName.value=''">
-    add
-  </button>
 </div>
 
 <ul class="places">
@@ -32,7 +35,6 @@
     <a routerLink="/detail/{{place.id}}">
       <span class="badge">{{place.id}}</span> {{place.name}}
     </a>
-    <button class="delete" title="delete place"
-      (click)="delete(place)">x</button>
+    <button class="delete" title="delete place">x</button>
   </li>
 </ul>
