@@ -7,14 +7,14 @@
     <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
       (dragEnd)="markerDragEnd($event)"> 
       <agm-info-window> 
-          <form class="form-signin"  #signupForm="ngForm">
-              <h2 class="form-signin-heading">Inserisci informazioni</h2>
-              <label for="id" class="sr-only">id</label><br>
-              <input type="text" class="form-control" placeholder="0"  name="id" required/><br>
-              <label for="name" class="sr-only">name</label><br>
-              <input type="text" class="form-control" placeholder="Via dalle Palle"  name="name" required/><br>
-              <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!signupForm.form.valid">Submit</button>
-            </form>
+        <form class="form-place"  #placeForm="ngForm">
+          <h2 class="form-place-heading">Inserisci informazioni</h2>
+          <label for="id" class="sr-only">id</label><br>
+          <input type="text" class="form-control" placeholder="0"  name="id" required/><br>
+          <label for="name" class="sr-only">name</label><br>
+          <input type="text" class="form-control" placeholder="Via dalle Palle"  name="name" required/><br>
+          <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!placeForm.valid">Submit</button>
+        </form>
 
       </agm-info-window>
     </agm-marker>
@@ -25,18 +25,51 @@
     [latitude]="place.latitude"
     [longitude]="place.longitude"
     [markerDraggable]="false">
-    
   <agm-info-window>
       <strong>{{place.id}}</strong><br>
     <strong>{{place.name}}</strong><br>
     <strong>{{place.latitude}}</strong><br>
-    <strong>{{place.longitude}}</strong><br>
+    <strong>{{place.longitude}}</strong><br><br>
+    <form class="form-clip"  #clipForm="ngForm">
+      <h2 class="form-clip-heading">Inserisci informazioni</h2>
+      <label for="id" class="sr-only">id</label><br>
+      <input type="text" class="form-control" placeholder="{{place.id}}"  name="id" required readonly="readonly"/><br>
+      <label for="latitude" class="sr-only">latitude</label><br>
+      <input type="text" class="form-control" placeholder="{{place.latitude}}"  name="latitude" required readonly="readonly"/><br>
+      <label for="longitude" class="sr-only">longitude</label><br>
+      <input type="text" class="form-control" placeholder="{{place.longitude}}"  name="latitude" required readonly="readonly"/><br>
+      <select>
+        <option> WHY </option>
+        <option> WHAT </option>
+        <option> HOW </option>
+      </select><br>
+      <select>
+        <option>ita</option>
+        <option>eng </option>
+        <option>deu </option>
+        <option>fra</option>
+        <option>esp</option>
+      </select><br>
+      <select>
+        <option>none</option>
+        <option>art</option>
+        <option>rel</option>
+      </select><br>
+      <select>
+        <option>gen</option>
+        <option>pre</option>
+        <option>rel</option>
+        <option>elm</option>
+      </select><br>
+      <input type="number" name="detail" value="1" min="1" max="5">
+      
+      <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!clipForm.form.valid">Submit</button>
+    </form>
+   
   </agm-info-window>
   
   </agm-marker>
   
   </agm-map>
  
-  <div>Latitude: {{latitude}}</div>
-  <div>Longitude: {{longitude}}</div>
 </div>

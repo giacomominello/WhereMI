@@ -44,7 +44,7 @@ import { SignupComponent } from './signup/signup.component';
 
   
 
-  ],
+  ], 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

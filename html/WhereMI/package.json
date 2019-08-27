@@ -37,6 +37,7 @@
     "serve-favicon": "^2.5.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
+
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.802.2",
