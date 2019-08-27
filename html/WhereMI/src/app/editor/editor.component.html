@@ -9,15 +9,32 @@
       <agm-info-window> 
           <form class="form-signin"  #signupForm="ngForm">
               <h2 class="form-signin-heading">Inserisci informazioni</h2>
-              <label for="inputEmail" class="sr-only">id</label>
-              <input type="email" class="form-control" placeholder="0"  name="username" required/>
-              <label for="inputPassword" class="sr-only">name</label>
-              <input type="password" class="form-control" placeholder="Via dalle Palle"  name="password" required/>
+              <label for="id" class="sr-only">id</label><br>
+              <input type="text" class="form-control" placeholder="0"  name="id" required/><br>
+              <label for="name" class="sr-only">name</label><br>
+              <input type="text" class="form-control" placeholder="Via dalle Palle"  name="name" required/><br>
               <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!signupForm.form.valid">Submit</button>
             </form>
 
       </agm-info-window>
     </agm-marker>
+
+
+    <agm-marker 
+    *ngFor="let place of places"
+    [latitude]="place.latitude"
+    [longitude]="place.longitude"
+    [markerDraggable]="false">
+    
+  <agm-info-window>
+      <strong>{{place.id}}</strong><br>
+    <strong>{{place.name}}</strong><br>
+    <strong>{{place.latitude}}</strong><br>
+    <strong>{{place.longitude}}</strong><br>
+  </agm-info-window>
+  
+  </agm-marker>
+  
   </agm-map>
  
   <div>Latitude: {{latitude}}</div>

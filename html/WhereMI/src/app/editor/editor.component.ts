@@ -1,3 +1,5 @@
+import { Place } from '../place';
+import { PlaceService } from '../place.service';
 import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { MapsAPILoader, MouseEvent } from '@agm/core';
 @Component({
@@ -14,10 +16,10 @@ export class EditorComponent implements OnInit {
  
   @ViewChild('search',{static: false})
   public searchElementRef: ElementRef;
-
+  places:Place[];
  
   constructor(
-
+    private placeService: PlaceService,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone) { }
 
@@ -55,6 +57,7 @@ export class EditorComponent implements OnInit {
         alert("Geolocation is not supported by this browser.");
       }
 
+    this.getPlaces();
   }
 
   
@@ -79,10 +82,17 @@ export class EditorComponent implements OnInit {
   }
 
 
+
   markerDragEnd($event: MouseEvent) {
     console.log($event);
     this.latitude = $event.coords.lat;
     this.longitude = $event.coords.lng;
+  }
+
+  
+  getPlaces(): void {
+    this.placeService.getPlaces()
+        .subscribe(places => this.places = places);
   }
 
 }

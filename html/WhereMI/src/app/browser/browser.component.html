@@ -13,12 +13,15 @@
  
     <agm-marker 
     *ngFor="let place of places"
-    [latitude]="latitude+1"
-    [longitude]="longitude+1"
+    [latitude]="place.latitude"
+    [longitude]="place.longitude"
     [markerDraggable]="false">
     
   <agm-info-window>
-    <strong>{{place.name}}</strong>
+      <strong>{{place.id}}</strong><br>
+    <strong>{{place.name}}</strong><br>
+    <strong>{{place.latitude}}</strong><br>
+    <strong>{{place.longitude}}</strong><br>
   </agm-info-window>
   
   </agm-marker>
