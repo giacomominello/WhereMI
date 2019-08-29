@@ -17,6 +17,9 @@ export class PlaceService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
+  httpOptionsAuth = {
+    headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken'),'Content-Type': 'application/json' })
+    };
 
   constructor(
     private http: HttpClient,
@@ -71,8 +74,8 @@ export class PlaceService {
 
   /** POST: add a new place to the server */
   addPlace (place: Place): Observable<Place> {
-    return this.http.post<Place>(this.placesUrl, place, this.httpOptions).pipe(
-      tap((newPlace: Place) => this.log(`added place w/ id=${newPlace.id}`)),
+    return this.http.post<Place>(this.placesUrl, place, this.httpOptionsAuth).pipe(
+      tap((place: Place) => this.log(`added place w/ id=${place.id}`)),
       catchError(this.handleError<Place>('addPlace'))
     );
   }

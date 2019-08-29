@@ -10,7 +10,6 @@ import { EditorComponent } from './editor/editor.component';
 import { BrowserComponent } from './browser/browser.component';
 
 import { MessagesComponent } from './messages/messages.component';
-import { PlaceSearchComponent } from './place-search/place-search.component';
 
 import { AgmCoreModule } from '@agm/core';
 import { LoginComponent } from './login/login.component';
@@ -23,7 +22,6 @@ import { SignupComponent } from './signup/signup.component';
     EditorComponent,
     BrowserComponent,
     MessagesComponent,
-    PlaceSearchComponent,
     LoginComponent,
     SignupComponent
   ],
@@ -31,7 +29,6 @@ import { SignupComponent } from './signup/signup.component';
     BrowserModule,
     HttpClientModule,
     FormsModule,
-
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAzSnXXXXXXXXXXXXXXXXXSZGGWU',
       libraries: ['places']

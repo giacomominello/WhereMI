@@ -46,7 +46,7 @@ export class ClipService {
       );
   }
 
-  /** GET place by id. Will 404 if id not found */
+  /** GET clip by id. Will 404 if id not found */
   getClip(id: number): Observable<Clip> {
     const url = `${this.clipsUrl}/${id}`;
     return this.http.get<Clip>(url).pipe(
@@ -58,7 +58,7 @@ export class ClipService {
   /* GET clips whose name contains search term */
   searchClips(term: string): Observable<Clip[]> {
     if (!term.trim()) {
-      // if not search term, return empty place array.
+      // if not search term, return empty clip array.
       return of([]);
     }
     return this.http.get<Clip[]>(`${this.clipsUrl}/?name=${term}`).pipe(
@@ -77,18 +77,18 @@ export class ClipService {
     );
   }
 
-  /** DELETE: delete the place from the server */
+  /** DELETE: delete the clip from the server */
   deleteClip (clip: Clip | number): Observable<Clip> {
     const id = typeof clip === 'number' ? clip : clip.id;
     const url = `${this.clipsUrl}/${id}`;
 
     return this.http.delete<Clip>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleted place id=${id}`)),
+      tap(_ => this.log(`deleted clip id=${id}`)),
       catchError(this.handleError<Clip>('deleteClip'))
     );
   }
 
-  /** PUT: update the place on the server */
+  /** PUT: update the clip on the server */
   updateClip (clip: Clip): Observable<any> {
     return this.http.put(this.clipsUrl, clip, this.httpOptions).pipe(
       tap(_ => this.log(`updated clip id=${clip.id}`)),
@@ -116,8 +116,8 @@ export class ClipService {
     };
   }
 
-  /** Log a PlaceService message with the MessageService */
+  /** Log a clipService message with the MessageService */
   private log(message: string) {
-    this.messageService.add(`PlaceService: ${message}`);
+    this.messageService.add(`ClipService: ${message}`);
   }
 }

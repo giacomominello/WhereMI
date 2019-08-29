@@ -2,9 +2,10 @@ import { Place } from '../place';
 import { PlaceService } from '../place.service';
 import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { MapsAPILoader, MouseEvent } from '@agm/core';
+import { Router } from "@angular/router";
 
 import { AfterViewInit } from '@angular/core';
-let RecordRTC = require('recordrtc/RecordRTC.min');
+import * as RecordRTC from 'recordrtc';
 
 @Component({
   selector: 'app-editor',
@@ -16,16 +17,18 @@ export class EditorComponent implements OnInit {
   longitude: number;
   zoom: number;
   address: string;
+   
+  placeData = { id:0, name:'test', latitude:0,longitude:0};
 
+  msbapAudioUrl:string;
   public searchElementRef: ElementRef;
   places:Place[];
 
   private stream: MediaStream;
   private recordRTC: any;
 
-  @ViewChild('video',{static: false}) video;
-
   constructor(
+    private router: Router,
     private placeService: PlaceService,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone) { }
@@ -45,6 +48,7 @@ export class EditorComponent implements OnInit {
       }
 
     this.getPlaces();
+    this.msbapAudioUrl="";
 
   }
 
@@ -54,8 +58,6 @@ export class EditorComponent implements OnInit {
     this.latitude = position.coords.latitude;
     this.longitude = position.coords.longitude;
     this.zoom = 12;
-    let location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-    //this.map.panTo(location);
   }
 
  // Get Current Location Coordinates
@@ -83,48 +85,28 @@ export class EditorComponent implements OnInit {
   }
 
 
- ngAfterViewInit() {
-    // set the initial state of the video
-    let video:HTMLVideoElement = this.video.nativeElement;
-    video.muted = false;
-    video.controls = true;
-    video.autoplay = false;
-  }
-
-  toggleControls() {
-    let video: HTMLVideoElement = this.video.nativeElement;
-    video.muted = !video.muted;
-    video.controls = !video.controls;
-    video.autoplay = !video.autoplay;
-  }
 
   successCallback(stream: MediaStream) {
 
     var options = {
-      mimeType: 'video/webm', // or video/webm\;codecs=h264 or video/webm\;codecs=vp9
+      mimeType: 'audio/wav', // or video/webm\;codecs=h264 or video/webm\;codecs=vp9
       audioBitsPerSecond: 128000,
-      videoBitsPerSecond: 128000,
       bitsPerSecond: 128000 // if this line is provided, skip above two
     };
     this.stream = stream;
     this.recordRTC = RecordRTC(stream, options);
     this.recordRTC.startRecording();
-    let video: HTMLVideoElement = this.video.nativeElement;
-    video.src = window.URL.createObjectURL(stream);
-    this.toggleControls();
   }
 
   errorCallback() {
     //handle error here
   }
 
-  processVideo(audioVideoWebMURL) {
-    let video: HTMLVideoElement = this.video.nativeElement;
+  processVideo(audioURL) {
     let recordRTC = this.recordRTC;
-    video.src = audioVideoWebMURL;
-    this.toggleControls();
     var recordedBlob = recordRTC.getBlob();
     recordRTC.getDataURL(function (dataURL) { });
+    console.log(audioURL);
   }
 
   startRecording() {
@@ -144,9 +126,27 @@ export class EditorComponent implements OnInit {
     let stream = this.stream;
     stream.getAudioTracks().forEach(track => track.stop());
     stream.getVideoTracks().forEach(track => track.stop());
+
   }
 
-  download() {
-    this.recordRTC.save('video.webm');
+  download() : void {
+    this.recordRTC.save('audio.wav');
+  }
+
+  submitClip(): void {
+  console.log('submitClip');
+  }
+
+
+  submitPlace() {
+    this.placeData.latitude=this.latitude;
+    this.placeData.longitude=this.longitude;
+    this.placeService.addPlace(this.placeData).subscribe(resp => {
+      console.log(resp);
+      this.router.navigate(['editor']);
+    }, err => {
+      console.log(err.error.msg);
+    });
   }
 }
+

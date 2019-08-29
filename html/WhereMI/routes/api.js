@@ -53,36 +53,6 @@ router.post('/signin', function(req, res) {
   });
 });
 
-router.post('/book', function(req, res) {
-  
-    console.log(req.body);
-    var newBook = new Book({
-      isbn: req.body.isbn,
-      title: req.body.title,
-      author: req.body.author,
-      publisher: req.body.publisher
-    });
-
-    newBook.save(function(err) {
-      if (err) {
-        return res.json({success: false, msg: 'Save book failed.'});
-      }
-      res.json({success: true, msg: 'Successful created new book.'});
-    });
-
-});
-
-router.get('/book', passport.authenticate('jwt', { session: false}), function(req, res) {
-  var token = getToken(req.headers);
-  if (token) {
-    Book.find(function (err, books) {
-      if (err) return next(err);
-      res.json(books);
-    });
-  } else {
-    return res.status(403).send({success: false, msg: 'Unauthorized.'});
-  }
-});
 
 router.get('/places', function(req, res) {
     Place.find(function (err, places) {
@@ -97,7 +67,9 @@ router.post('/places', passport.authenticate('jwt', { session: false}), function
     console.log(req.body);
     var newPlace = new Place({
       id: req.body.id,
-      title: req.body.title,
+      name: req.body.name,
+      latitude: req.body.latitude,
+      longitude: req.body.longitude
     });
 
     newPlace.save(function(err) {
@@ -130,6 +102,26 @@ router.get('/clips', function(req, res) {
     if (err) return next(err);
     res.json(clips);
   });
+});
+
+router.post('/clips', passport.authenticate('jwt', { session: false}), function(req, res) {
+  var token = getToken(req.headers);
+  if (token) {
+    console.log(req.body);
+    var newClip = new Clip({
+      id: req.body.id,
+      title: req.body.title,
+    });
+
+    newClip.save(function(err) {
+      if (err) {
+        return res.json({success: false, msg: 'Save clip failed.'});
+      }
+      res.json({success: true, msg: 'Successful created new clip.'});
+    });
+  } else {
+    return res.status(403).send({success: false, msg: 'Unauthorized.'});
+  }
 });
 
 module.exports = router;
