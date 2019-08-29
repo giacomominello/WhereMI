@@ -8,8 +8,8 @@ var express = require('express');
 var jwt = require('jsonwebtoken');
 var router = express.Router();
 var User = require("../models/User");
-var Book = require("../models/Book");
 var Place = require("../models/Place");
+var Clip= require("../models/Clip");
 
 router.post('/signup', function(req, res) {
   if (!req.body.username || !req.body.password) {
@@ -124,5 +124,12 @@ getToken = function (headers) {
     return null;
   }
 };
+
+router.get('/clips', function(req, res) {
+  Clip.find(function (err, clips) {
+    if (err) return next(err);
+    res.json(clips);
+  });
+});
 
 module.exports = router;

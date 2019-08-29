@@ -22,6 +22,17 @@
     <strong>{{place.name}}</strong><br>
     <strong>{{place.latitude}}</strong><br>
     <strong>{{place.longitude}}</strong><br>
+    <div *ngFor="let clip of clips">
+    <div *ngIf="clip.idP==place.id">
+      <strong>{{clip.id}}</strong><br>
+      <strong>{{clip.purpose}}</strong><br>
+      <strong>{{clip.language}}</strong><br>
+      <strong>{{clip.category}}</strong><br>
+      <strong>{{clip.audience}}</strong><br>
+      <strong>{{clip.level}}</strong><br>
+      <strong>{{clip.streamUrl}}</strong><br>
+    </div>
+  </div>
   </agm-info-window>
   
   </agm-marker>
@@ -32,12 +43,3 @@
   <div>Latitude: {{latitude}}</div>
   <div>Longitude: {{longitude}}</div>
 </div>
-
-<ul class="places">
-  <li *ngFor="let place of places">
-    <a routerLink="/detail/{{place.id}}">
-      <span class="badge">{{place.id}}</span> {{place.name}}
-    </a>
-    <button class="delete" title="delete place">x</button>
-  </li>
-</ul>

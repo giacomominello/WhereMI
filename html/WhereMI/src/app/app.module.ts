@@ -8,9 +8,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EditorComponent } from './editor/editor.component';
 import { BrowserComponent } from './browser/browser.component';
-import { LocationDetailComponent } from './location-detail/location-detail.component';
+
 import { MessagesComponent } from './messages/messages.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { PlaceSearchComponent } from './place-search/place-search.component';
 
 import { AgmCoreModule } from '@agm/core';
@@ -23,9 +22,7 @@ import { SignupComponent } from './signup/signup.component';
     AppComponent,
     EditorComponent,
     BrowserComponent,
-    LocationDetailComponent,
     MessagesComponent,
-    DashboardComponent,
     PlaceSearchComponent,
     LoginComponent,
     SignupComponent

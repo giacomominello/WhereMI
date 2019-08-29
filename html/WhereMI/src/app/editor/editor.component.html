@@ -1,3 +1,5 @@
+
+
 <h2>Editor</h2>
 
 <div class="container">
@@ -61,8 +63,28 @@
         <option>rel</option>
         <option>elm</option>
       </select><br>
-      <input type="number" name="detail" value="1" min="1" max="5">
+      <input type="number" name="detail" value="1" min="1" max="5"><br>
+  
+
+
+      <div class="row">
+        <div class="col-xs-12">
+          <video #video class="video"></video>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <button md-raised-button color="primary" (click)="startRecording()"> Record </button>
+          <button md-raised-button color="primary"(click) ="stopRecording()"> Stop</button>
+          <button md-raised-button color="primary" (click)="download()"> Download</button>
+        </div>
+      </div>
       
+
+
+
+
+
       <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!clipForm.form.valid">Submit</button>
     </form>
    
