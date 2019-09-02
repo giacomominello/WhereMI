@@ -15,6 +15,7 @@ body {
   background-image: url("sfondo.jpg");
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: 75% 25%;
 }
 body, input[type="text"], button {
   color: #333;
