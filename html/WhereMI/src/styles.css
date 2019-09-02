@@ -12,6 +12,9 @@ h2, h3 {
 }
 body {
   margin: 2em;
+  background-image: url("sfondo.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 body, input[type="text"], button {
   color: #333;
