@@ -1,0 +1,10 @@
+<h1>{{title}}</h1>
+<nav>
+    <a routerLink="/login">Login</a>
+    <a routerLink="/browser">Browser</a>
+    <a id="ciao" routerLink="/editor">Editor</a>
+    <button type="button" id="logout" (click)="logout()">Logout</button>
+  </nav>
+
+<router-outlet></router-outlet>
+<app-messages></app-messages>
