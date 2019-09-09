@@ -1,0 +1,91 @@
+
+
+<h2>Editor</h2>
+
+<div class="container">
+  
+
+  <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+    <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
+      (dragEnd)="markerDragEnd($event)"> 
+      <agm-info-window> 
+        <form class="form-place" (ngSubmit)="submitPlace()"  #placeForm="ngForm">
+          <h2 class="form-place-heading">Inserisci informazioni</h2>
+          <label for="id" class="sr-only">id</label><br>
+          <input type="text" class="form-control" placeholder="0"  [(ngModel)]="placeData.id" name="id" required/><br>
+          <label for="name" class="sr-only">name</label><br>
+          <input type="text" class="form-control" placeholder="Via dalle Palle" [(ngModel)]="placeData.name" name="name" required/><br>
+          <label for="latitude" class="sr-only">latitude</label><br>
+          <input type="text" class="form-control" value="{{latitude}}"  name="latitude"  [(ngModel)]="placeData.latitude" required readonly="readonly"/><br>
+          <label for="longitude" class="sr-only">longitude</label><br>
+          <input type="text" class="form-control" value="{{longitude}}"  name="longitude"  [(ngModel)]="placeData.longitude" required readonly="readonly"/><br>
+          <button class="btn btn-primary btn-block" type="submit"  [disabled]="!placeForm.valid">Submit</button>
+        </form>
+
+      </agm-info-window>
+    </agm-marker>
+
+
+    <agm-marker 
+    *ngFor="let place of places"
+    [latitude]="place.latitude"
+    [longitude]="place.longitude"
+    [markerDraggable]="false">
+  <agm-info-window>
+      <strong>{{place.id}}</strong><br>
+    <strong>{{place.name}}</strong><br>
+    <strong>{{place.latitude}}</strong><br>
+    <strong>{{place.longitude}}</strong><br><br>
+    <form class="form-clip"  (ngSubmit)="submitClip()" #clipForm="ngForm">
+      <h2 class="form-clip-heading">Inserisci informazioni</h2>
+      <label for="id" class="sr-only">id</label><br>
+      <input type="text" class="form-control" value="{{place.id}}"  name="id" required readonly="readonly"/><br>
+      <label for="latitude" class="sr-only">latitude</label><br>
+      <input type="text" class="form-control" value="{{place.latitude}}"  name="latitude" required readonly="readonly"/><br>
+      <label for="longitude" class="sr-only">longitude</label><br>
+      <input type="text" class="form-control" value="{{place.longitude}}"  name="latitude" required readonly="readonly"/><br>
+      <select>
+        <option> WHY </option>
+        <option> WHAT </option>
+        <option> HOW </option>
+      </select><br>
+      <select>
+        <option>ita</option>
+        <option>eng </option>
+        <option>deu </option>
+        <option>fra</option>
+        <option>esp</option>
+      </select><br>
+      <select>
+        <option>none</option>
+        <option>art</option>
+        <option>rel</option>
+      </select><br>
+      <select>
+        <option>gen</option>
+        <option>pre</option>
+        <option>rel</option>
+        <option>elm</option>
+      </select><br>
+      <input type="number" name="detail" value="1" min="1" max="5"><br>
+  
+
+      <div class="row">
+        <div class="col-xs-12">
+          <button md-raised-button color="primary" (click)="startRecording()"> Record </button>
+          <button md-raised-button color="primary"(click) ="stopRecording()"> Stop</button>
+          <button md-raised-button color="primary" (click)="download()"> Download</button><br>
+        </div><br>
+      </div>
+    
+
+      <button class="btn btn-lg btn-primary btn-block" type="submit"  [disabled]="!clipForm.form.valid">Submit</button>
+    </form>
+   
+  </agm-info-window>
+  
+  </agm-marker>
+  
+  </agm-map>
+ 
+</div>
