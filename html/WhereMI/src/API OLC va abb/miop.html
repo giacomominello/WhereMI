@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>The XMLHttpRequest Object</h1>
+
+<button type="button" onclick="loadDoc()">Request data</button>
+
+<p id="demo"></p>
+
+
+<script>
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "https://plus.codes/api?address=14.917313,-23.511313", true);
+  
+  
+//xhttp.send();
+var json = xhttp.send();
+obj = JSON.parse(json);
+
+console.log(obj.status);
+
+}
+
+
+</script>
+
+
+</body>
+</html>

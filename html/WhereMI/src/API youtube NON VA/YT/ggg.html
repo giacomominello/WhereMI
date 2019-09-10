@@ -1,0 +1,22 @@
+<html>
+<body>
+<div>
+	<label for="termine">Inserisci il termine da ricercare</label>
+	<input id="termine" type="text" />
+	<button onclick="findItem();">Cerca</button>
+</div>
+<script>
+function findItem() {
+	var id = $('#termine').val();
+	$.getJSON("api/items/" + id,
+		function (data) {
+			var str = '<p><b>' + data.term + '</b><br/>' + data.definition + '</p>';
+			$('#divDefinizioni').html(str);
+		}).fail(
+		    function (jqXHR, textStatus, err) {
+			    $('#divDefinizioni').html('Error: ' + err);
+				});
+}
+</script>
+</body>
+</html>
