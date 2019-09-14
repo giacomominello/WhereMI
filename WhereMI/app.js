@@ -3,9 +3,10 @@ var path = require('path');
 
 var logger = require('morgan');
 var bodyParser = require('body-parser');
+const Youtube = require("youtube-api");
+var mongodb = require('mongodb');
+require("./config/dbconnection.js").open();
 
-
-var mongoose = require('mongoose');
 var passport = require('passport');
 var config = require('./config/database');
 
@@ -14,10 +15,7 @@ var app = express();
 
 console.log(config.database);
 
-mongoose.Promise = require('bluebird');
-mongoose.connect(config.database, { promiseLibrary: require('bluebird') },{useNewUrlParser: true})
-  .then(() =>  console.log('connection succesful'))
-  .catch((err) => console.error(err));
+
 
 app.use(passport.initialize());
 

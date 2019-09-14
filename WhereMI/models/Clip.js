@@ -1,5 +1,3 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
 
 var ClipSchema = new Schema({
     id: {
@@ -47,5 +45,3 @@ var ClipSchema = new Schema({
         required: true
       },
 });
-
-module.exports = mongoose.model('Clip', ClipSchema);

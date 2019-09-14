@@ -8,6 +8,7 @@ import { Router } from "@angular/router";
 import { AfterViewInit } from '@angular/core';
 import * as RecordRTC from 'recordrtc';
 import { TestBed } from '@angular/core/testing';
+import  OpenLocationCode from 'open-location-code-typescript'
 
 @Component({
   selector: 'app-editor',
@@ -17,6 +18,7 @@ import { TestBed } from '@angular/core/testing';
 export class EditorComponent implements OnInit {
   latitude: number;
   longitude: number;
+  olc:string;
   zoom: number;
   address: string;
    
@@ -62,6 +64,7 @@ export class EditorComponent implements OnInit {
     console.log(`tracking postion:  ${position.coords.latitude} - ${position.coords.longitude}`);
     this.latitude = position.coords.latitude;
     this.longitude = position.coords.longitude;
+    this.olc= OpenLocationCode.encode( this.latitude, this.longitude)
     this.zoom = 12;
   }
 
@@ -71,6 +74,7 @@ export class EditorComponent implements OnInit {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
+        this.olc= OpenLocationCode.encode( this.latitude, this.longitude)
         this.zoom = 8;
       });
     }
@@ -81,6 +85,7 @@ export class EditorComponent implements OnInit {
     console.log($event);
     this.latitude = $event.coords.lat;
     this.longitude = $event.coords.lng;
+    this.olc= OpenLocationCode.encode( this.latitude, this.longitude)
   }
 
   

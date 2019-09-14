@@ -5,7 +5,7 @@ import { ClipService } from '../clip.service';
 import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { MapsAPILoader, MouseEvent } from '@agm/core';
 import { DomSanitizer } from '@angular/platform-browser'; 
-
+import  OpenLocationCode from 'open-location-code-typescript'
 @Component({
   selector: 'app-browser',
   templateUrl: './browser.component.html',
@@ -16,7 +16,7 @@ export class BrowserComponent implements OnInit {
   longitude: number;
   zoom: number;
   address: string;
-
+ olc:string;
  
   @ViewChild('search',{static: false})
   public searchElementRef: ElementRef;
@@ -58,6 +58,7 @@ export class BrowserComponent implements OnInit {
     console.log(`tracking postion:  ${position.coords.latitude} - ${position.coords.longitude}`);
     this.latitude = position.coords.latitude;
     this.longitude = position.coords.longitude;
+    this.olc= OpenLocationCode.encode( this.latitude, this.longitude)
     this.zoom = 12;
     let location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     //this.map.panTo(location);
@@ -69,6 +70,7 @@ export class BrowserComponent implements OnInit {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
+        this.olc= OpenLocationCode.encode( this.latitude, this.longitude)
         this.zoom = 8;
       });
     }
@@ -80,6 +82,7 @@ export class BrowserComponent implements OnInit {
     console.log($event);
     this.latitude = $event.coords.lat;
     this.longitude = $event.coords.lng;
+    this.olc= OpenLocationCode.encode( this.latitude, this.longitude)
   }
 
   
