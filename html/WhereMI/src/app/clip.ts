@@ -9,5 +9,5 @@ export class Clip {
     category: string;
     audience: string;
     level: number;
-    streamUrl: string;
+    streamUrl: any;
   }

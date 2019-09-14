@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 
 import { HttpClientModule }    from '@angular/common/http';
-
+import { YTPlayerModule } from 'angular-youtube-player';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EditorComponent } from './editor/editor.component';
@@ -27,6 +27,7 @@ import { SignupComponent } from './signup/signup.component';
   ],
   imports: [
     BrowserModule,
+    YTPlayerModule,
     HttpClientModule,
     FormsModule,
     AgmCoreModule.forRoot({

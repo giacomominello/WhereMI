@@ -12,8 +12,10 @@ var config = require('./config/database');
 var api = require('./routes/api');
 var app = express();
 
+console.log(config.database);
+
 mongoose.Promise = require('bluebird');
-mongoose.connect(config.database, { promiseLibrary: require('bluebird') })
+mongoose.connect(config.database, { promiseLibrary: require('bluebird') },{useNewUrlParser: true})
   .then(() =>  console.log('connection succesful'))
   .catch((err) => console.error(err));
 

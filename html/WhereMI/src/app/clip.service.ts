@@ -14,9 +14,11 @@ export class ClipService {
 
   private clipsUrl = 'api/clips';  // URL to web api
 
+ 
+
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
+    headers: new HttpHeaders({ 'Authorization': localStorage.getItem('jwtToken'),'Content-Type': 'application/json' })
+    };
 
   constructor(
     private http: HttpClient,
@@ -30,6 +32,7 @@ export class ClipService {
         tap(_ => this.log('fetched clips')),
         catchError(this.handleError<Clip[]>('getClips', []))
       );
+      
   }
 
   /** GET clip by id. Return `undefined` when id not found */

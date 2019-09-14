@@ -4,6 +4,8 @@ import { Clip } from '../clip'
 import { ClipService } from '../clip.service';
 import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { MapsAPILoader, MouseEvent } from '@agm/core';
+import { DomSanitizer } from '@angular/platform-browser'; 
+
 @Component({
   selector: 'app-browser',
   templateUrl: './browser.component.html',
@@ -25,7 +27,9 @@ export class BrowserComponent implements OnInit {
     private placeService: PlaceService,
     private clipService: ClipService,
     private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone) { }
+    private ngZone: NgZone,
+    public sanitizer: DomSanitizer
+    ) { }
 
   ngOnInit() {
       //load Places Autocomplete
@@ -43,7 +47,10 @@ export class BrowserComponent implements OnInit {
 
     this.getPlaces();
     this.getClips();
-  
+
+    
+
+   
   }
 
   
@@ -79,11 +86,13 @@ export class BrowserComponent implements OnInit {
   getPlaces(): void {
     this.placeService.getPlaces()
         .subscribe(places => this.places = places);
+    
   }
 
   getClips(): void {
     this.clipService.getClips()
         .subscribe(clips => this.clips = clips);
+   
   }
 
 }

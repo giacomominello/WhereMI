@@ -31,6 +31,7 @@
       <strong>{{clip.audience}}</strong><br>
       <strong>{{clip.level}}</strong><br>
       <strong>{{clip.streamUrl}}</strong><br>
+      <iframe [src]='sanitizer.bypassSecurityTrustResourceUrl(clip.streamUrl)' frameborder="0" allowfullscreen></iframe>
     </div>
   </div>
   </agm-info-window>

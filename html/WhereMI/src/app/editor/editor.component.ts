@@ -1,11 +1,13 @@
 import { Place } from '../place';
 import { PlaceService } from '../place.service';
+import { ClipService } from '../clip.service';
 import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { MapsAPILoader, MouseEvent } from '@agm/core';
 import { Router } from "@angular/router";
 
 import { AfterViewInit } from '@angular/core';
 import * as RecordRTC from 'recordrtc';
+import { TestBed } from '@angular/core/testing';
 
 @Component({
   selector: 'app-editor',
@@ -20,16 +22,19 @@ export class EditorComponent implements OnInit {
    
   placeData = { id:0, name:'test', latitude:0,longitude:0};
 
+  clipData = { id:0, idP:0, latitude:0,longitude:0, title:'test', purpose:'why', language:'ita', category:'art', audience:'gen', level:1,streamUrl:'https://www.youtube.com/embed/_Re22XL5jLs'};
+  
   msbapAudioUrl:string;
   public searchElementRef: ElementRef;
   places:Place[];
-
+  public formData = new FormData();
   private stream: MediaStream;
   private recordRTC: any;
 
   constructor(
     private router: Router,
     private placeService: PlaceService,
+    private clipService: ClipService,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone) { }
 
@@ -89,7 +94,7 @@ export class EditorComponent implements OnInit {
   successCallback(stream: MediaStream) {
 
     var options = {
-      mimeType: 'audio/wav', // or video/webm\;codecs=h264 or video/webm\;codecs=vp9
+      mimeType: 'video/webm', // or video/webm\;codecs=h264 or video/webm\;codecs=vp9
       audioBitsPerSecond: 128000,
       bitsPerSecond: 128000 // if this line is provided, skip above two
     };
@@ -126,15 +131,25 @@ export class EditorComponent implements OnInit {
     let stream = this.stream;
     stream.getAudioTracks().forEach(track => track.stop());
     stream.getVideoTracks().forEach(track => track.stop());
+    var recordedBlob = recordRTC.getBlob();
+     this.formData.append('key', recordedBlob);
 
   }
 
   download() : void {
-    this.recordRTC.save('audio.wav');
+    this.recordRTC.save('audio.webm');
   }
 
   submitClip(): void {
   console.log('submitClip');
+  
+  this.clipService.addClip(this.clipData).subscribe(resp => {
+    console.log(resp);
+    this.router.navigate(['editor']);
+  }, err => {
+    console.log(err.error.msg);
+  });
+  
   }
 
 
