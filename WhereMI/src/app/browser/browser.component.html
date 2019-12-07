@@ -1,3 +1,22 @@
+<!-- aggiunto in prova -->
+<script>
+var x = document.getElementById("demo");
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude; 
+}
+</script>
+
+<!-- fine prova -->
+
 <h2>My Places</h2>
 
 <div class="container">
@@ -35,10 +54,8 @@
     </div>
   </div>
   </agm-info-window>
-  
   </agm-marker>
-
-  
+ 
   </agm-map>
 
   <div>Latitude: {{latitude}}</div>
