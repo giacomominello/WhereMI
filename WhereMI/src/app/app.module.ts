@@ -3,19 +3,17 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 
 import { HttpClientModule }    from '@angular/common/http';
-
+import { YTPlayerModule } from 'angular-youtube-player';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EditorComponent } from './editor/editor.component';
 import { BrowserComponent } from './browser/browser.component';
-import { LocationDetailComponent } from './location-detail/location-detail.component';
+
 import { MessagesComponent } from './messages/messages.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService }  from './in-memory-data.service';
-import { PlaceSearchComponent } from './place-search/place-search.component';
 
 import { AgmCoreModule } from '@agm/core';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 
 @NgModule({
@@ -23,30 +21,25 @@ import { AgmCoreModule } from '@agm/core';
     AppComponent,
     EditorComponent,
     BrowserComponent,
-    LocationDetailComponent,
     MessagesComponent,
-    DashboardComponent,
-    PlaceSearchComponent
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
+    YTPlayerModule,
     HttpClientModule,
     FormsModule,
-
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCLlXi1S9v2zQ61x9daPz08JvPQjNPUzWo'
+      apiKey: 'AIzaSyAzSnXXXXXXXXXXXXXXXXXSZGGWU',
+      libraries: ['places']
     }),
 
     AppRoutingModule,
 
-    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
-    // and returns simulated server responses.
-    // Remove it when a real server is ready to receive requests.
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    )
+  
 
-  ],
+  ], 
   bootstrap: [AppComponent]
 })
 export class AppModule { }
